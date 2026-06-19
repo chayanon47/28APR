@@ -97,6 +97,7 @@ h1{font-size:36px;margin:16px 0 6px}
   border:1px solid rgba(255,255,255,.14);
   border-radius:20px;
   overflow:hidden;
+  margin-top:12px;
 }
 
 .sample-box img{
@@ -118,13 +119,6 @@ h1{font-size:36px;margin:16px 0 6px}
   border-radius:999px;
   font-weight:900;
   margin-bottom:8px;
-}
-
-.tone-preview{
-  width:100%;
-  display:block;
-  border-radius:12px;
-  margin-bottom:12px;
 }
 
 .totalBox{
@@ -229,29 +223,26 @@ button{
       <h2>3. เลือกโทนภาพหลัก</h2>
 
       <div class="grid">
-
         <label class="option-card">
-          <input type="radio" name="mainTone" value="โทน A" checked>
-          <img src="image/tone-a.jpg" class="tone-preview" alt="ตัวอย่างโทน A">
+          <input type="radio" name="mainTone" value="A" checked>
           <div class="title">โทน A</div>
           <div class="desc">เลือกเป็นโทนหลักของชุดภาพนี้</div>
         </label>
 
         <label class="option-card">
-          <input type="radio" name="mainTone" value="โทน B">
-          <img src="image/tone-b.jpg" class="tone-preview" alt="ตัวอย่างโทน B">
+          <input type="radio" name="mainTone" value="B">
           <div class="title">โทน B</div>
           <div class="desc">เลือกเป็นโทนหลักของชุดภาพนี้</div>
         </label>
 
         <label class="option-card">
-          <input type="radio" name="mainTone" value="โทน C">
-          <img src="image/tone-c.jpg" class="tone-preview" alt="ตัวอย่างโทน C">
+          <input type="radio" name="mainTone" value="C">
           <div class="title">โทน C</div>
           <div class="desc">เลือกเป็นโทนหลักของชุดภาพนี้</div>
         </label>
-
       </div>
+
+      <div id="tonePreview"></div>
 
       <div class="note">โทนที่เลือกเป็นโทนหลัก จะไม่แสดงซ้ำใน Option เพิ่ม</div>
     </div>
@@ -349,6 +340,7 @@ function renderPackages(){
     el.addEventListener('change',()=>{
       renderSample();
       renderTone();
+      renderTonePreview();
       renderOptions();
       calculate();
     });
@@ -356,6 +348,7 @@ function renderPackages(){
 
   renderSample();
   renderTone();
+  renderTonePreview();
   renderOptions();
   calculate();
 }
@@ -416,6 +409,30 @@ function renderTone(){
   }
 }
 
+function renderTonePreview(){
+  const pkg = document.querySelector('input[name="package"]:checked');
+  const tonePreview = document.getElementById("tonePreview");
+
+  if(pkg.dataset.type !== "pageTone"){
+    tonePreview.innerHTML = "";
+    return;
+  }
+
+  const tone = document.querySelector('input[name="mainTone"]:checked').value;
+
+  tonePreview.innerHTML = `
+    <div class="sample-box">
+      <img src="image/tone-${tone.toLowerCase()}.jpg" alt="ตัวอย่างโทน ${tone}">
+      <div class="sample-info">
+        <div class="sample-tag">โทน ${tone}</div><br>
+        <strong>ตัวอย่างแต่งภาพโทนเพจ โทน ${tone}</strong><br>
+        ใช้เป็นโทนหลักของชุดภาพนี้<br>
+        ได้ไฟล์ใหญ่ + 2048px
+      </div>
+    </div>
+  `;
+}
+
 function renderOptions(){
   const pkg = document.querySelector('input[name="package"]:checked');
   const pkgType = pkg.dataset.type;
@@ -456,7 +473,7 @@ function renderOptions(){
     ];
 
     options = options.filter(opt=>{
-      return !opt.includes(selectedMainTone);
+      return !opt.includes("โทน " + selectedMainTone);
     });
   }
 
@@ -515,7 +532,7 @@ function calculate(){
 
   const toneLine =
     pkg.dataset.type === "pageTone"
-    ? `โทนภาพหลัก: ${document.querySelector('input[name="mainTone"]:checked').value}\n`
+    ? `โทนภาพหลัก: โทน ${document.querySelector('input[name="mainTone"]:checked').value}\n`
     : "";
 
   document.getElementById("summary").value =
@@ -549,6 +566,7 @@ document.querySelectorAll('input[name="tripType"]').forEach(el=>{
 
 document.querySelectorAll('input[name="mainTone"]').forEach(el=>{
   el.addEventListener('change',()=>{
+    renderTonePreview();
     renderOptions();
     calculate();
   });
