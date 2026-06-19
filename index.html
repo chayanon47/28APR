@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>คำนวณราคาภาพ 28APR</title>
+
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -13,14 +15,23 @@ body{
   color:#fff;
   padding:18px;
 }
+
 .wrap{max-width:720px;margin:auto}
+
 .header{text-align:center;margin:25px 0}
+
 .badge{
-  display:inline-block;background:#ffcc00;color:#111;
-  padding:6px 14px;border-radius:999px;font-weight:800;
+  display:inline-block;
+  background:#ffcc00;
+  color:#111;
+  padding:6px 14px;
+  border-radius:999px;
+  font-weight:800;
 }
+
 h1{font-size:34px;margin:14px 0 5px}
 .sub{color:#ccc;margin:0}
+
 .panel{
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.12);
@@ -29,52 +40,109 @@ h1{font-size:34px;margin:14px 0 5px}
   padding:20px;
   box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
+
 .section{margin:22px 0}
 .section h2{font-size:18px;margin:0 0 12px;color:#ffdd55}
+
 .grid{display:grid;gap:12px}
+
 .option-card{
-  display:block;position:relative;cursor:pointer;
+  display:block;
+  position:relative;
+  cursor:pointer;
   background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.13);
-  border-radius:18px;padding:16px;
-  transition:.2s;
+  border-radius:18px;
+  padding:16px;
+  transition:.25s;
+  overflow:hidden;
 }
-.option-card:hover{transform:translateY(-2px);border-color:#ffcc00}
-.option-card input{position:absolute;opacity:0}
+
+.option-card:hover{
+  transform:translateY(-2px);
+  border-color:#ffcc00;
+}
+
+.option-card input{
+  position:absolute;
+  opacity:0;
+}
+
 .option-card:has(input:checked){
   background:linear-gradient(135deg,rgba(255,204,0,.22),rgba(255,255,255,.08));
   border-color:#ffcc00;
 }
+
 .title{font-weight:800;font-size:17px}
 .desc{color:#bbb;font-size:14px;margin-top:4px}
 .price{font-size:24px;font-weight:900;color:#00ff99;margin-top:8px}
+
+.option-wrap{
+  max-height:500px;
+  opacity:1;
+  transform:translateY(0);
+  transition:.35s ease;
+  overflow:hidden;
+}
+
+.option-wrap.hide{
+  max-height:0;
+  opacity:0;
+  transform:translateY(-8px);
+  pointer-events:none;
+}
+
 .totalBox{
   margin-top:22px;
   background:#050505;
   border:1px solid rgba(0,255,153,.35);
   border-radius:22px;
-  padding:18px;text-align:center;
+  padding:18px;
+  text-align:center;
 }
+
 .totalText{color:#aaa}
 .totalPrice{font-size:46px;font-weight:950;color:#00ff99}
+
 textarea{
-  width:100%;height:145px;margin-top:14px;
-  border:0;border-radius:16px;padding:14px;
-  background:#111;color:#fff;font-size:15px;
-  resize:none;outline:none;
+  width:100%;
+  height:145px;
+  margin-top:14px;
+  border:0;
+  border-radius:16px;
+  padding:14px;
+  background:#111;
+  color:#fff;
+  font-size:15px;
+  resize:none;
+  outline:none;
 }
+
 button{
-  width:100%;border:0;border-radius:16px;
+  width:100%;
+  border:0;
+  border-radius:16px;
   background:linear-gradient(135deg,#ffcc00,#ff9900);
-  padding:16px;font-size:18px;font-weight:900;
-  cursor:pointer;margin-top:12px;
+  padding:16px;
+  font-size:18px;
+  font-weight:900;
+  cursor:pointer;
+  margin-top:12px;
 }
-.footer{text-align:center;color:#888;font-size:13px;margin:18px 0}
+
+.footer{
+  text-align:center;
+  color:#888;
+  font-size:13px;
+  margin:18px 0;
+}
 </style>
 </head>
+
 <body>
 
 <div class="wrap">
+
   <div class="header">
     <div class="badge">28APR PHOTO RATE</div>
     <h1>คำนวณราคาภาพ</h1>
@@ -82,6 +150,7 @@ button{
   </div>
 
   <div class="panel">
+
     <div class="section">
       <h2>1. เลือกประเภทเหมา</h2>
       <div class="grid">
@@ -104,26 +173,10 @@ button{
       <div id="packageArea" class="grid"></div>
     </div>
 
-    <div class="section">
+    <div id="optionSection" class="section option-wrap">
       <h2>3. Option เพิ่ม รายการละ 100฿</h2>
 
-      <label class="option-card">
-        <input type="checkbox" class="option" data-name="ไฟล์ RAW">
-        <div class="title">ไฟล์ RAW</div>
-        <div class="desc">เพิ่ม 100฿</div>
-      </label>
-
-      <label class="option-card">
-        <input type="checkbox" class="option" data-name="รับโทนเพิ่ม">
-        <div class="title">รับโทนเพิ่ม</div>
-        <div class="desc">เพิ่ม 100฿</div>
-      </label>
-
-      <label class="option-card">
-        <input type="checkbox" class="option" data-name="สีกลางเพิ่ม">
-        <div class="title">สีกลางเพิ่ม</div>
-        <div class="desc">เพิ่ม 100฿</div>
-      </label>
+      <div id="optionArea" class="grid"></div>
     </div>
 
     <div class="totalBox">
@@ -132,62 +185,54 @@ button{
     </div>
 
     <textarea id="summary" readonly></textarea>
+
     <button onclick="copySummary()">คัดลอกข้อความสรุป</button>
+
   </div>
 
   <div class="footer">28APR : Automotive Photography</div>
+
 </div>
 
 <script>
 const prices = {
   single: [
-    {
-      name:"ภาพหลังกล้อง JPG 3000px",
-      price:300
-    },
-    {
-      name:"ไฟล์ RAW",
-      price:400
-    },
-    {
-      name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px",
-      price:400
-    },
-    {
-      name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px",
-      price:500
-    }
+    { name:"ภาพหลังกล้อง JPG 3000px", price:300, type:"jpg" },
+    { name:"เฉพาะไฟล์ RAW", price:400, type:"raw" },
+    { name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px", price:400, type:"neutral" },
+    { name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px", price:500, type:"pageTone" }
   ],
-
   both: [
-    {
-      name:"ภาพหลังกล้อง JPG 3000px",
-      price:500
-    },
-    {
-      name:"ไฟล์ RAW",
-      price:600
-    },
-    {
-      name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px",
-      price:800
-    },
-    {
-      name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px",
-      price:1000
-    }
+    { name:"ภาพหลังกล้อง JPG 3000px", price:500, type:"jpg" },
+    { name:"เฉพาะไฟล์ RAW", price:600, type:"raw" },
+    { name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px", price:800, type:"neutral" },
+    { name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px", price:1000, type:"pageTone" }
   ]
 };
+
+const allOptions = [
+  { name:"รับไฟล์ RAW เพิ่ม", type:"rawAdd" },
+  { name:"รับโทนเพจเพิ่ม", type:"pageToneAdd" },
+  { name:"รับสีกลางเพิ่ม", type:"neutralAdd" }
+];
 
 function renderPackages(){
   const tripType = document.querySelector('input[name="tripType"]:checked').value;
   const area = document.getElementById("packageArea");
+
   area.innerHTML = "";
 
   prices[tripType].forEach((pkg,index)=>{
     area.innerHTML += `
       <label class="option-card">
-        <input type="radio" name="package" value="${pkg.price}" data-name="${pkg.name}" ${index===0?"checked":""}>
+        <input
+          type="radio"
+          name="package"
+          value="${pkg.price}"
+          data-name="${pkg.name}"
+          data-type="${pkg.type}"
+          ${index===0 ? "checked" : ""}
+        >
         <div class="title">${pkg.name}</div>
         <div class="price">${pkg.price}฿</div>
       </label>
@@ -195,35 +240,87 @@ function renderPackages(){
   });
 
   document.querySelectorAll('input[name="package"]').forEach(el=>{
-    el.addEventListener('change',calculate);
+    el.addEventListener('change',()=>{
+      renderOptions();
+      calculate();
+    });
   });
 
+  renderOptions();
   calculate();
+}
+
+function renderOptions(){
+  const pkg = document.querySelector('input[name="package"]:checked');
+  const pkgType = pkg.dataset.type;
+  const optionSection = document.getElementById("optionSection");
+  const optionArea = document.getElementById("optionArea");
+
+  optionArea.innerHTML = "";
+
+  let availableOptions = [];
+
+  if(pkgType === "raw"){
+    availableOptions = [];
+  }
+
+  if(pkgType === "jpg"){
+    availableOptions = [
+      { name:"รับไฟล์ RAW เพิ่ม", type:"rawAdd" }
+    ];
+  }
+
+  if(pkgType === "neutral"){
+    availableOptions = [
+      { name:"รับไฟล์ RAW เพิ่ม", type:"rawAdd" },
+      { name:"รับโทนเพจเพิ่ม", type:"pageToneAdd" }
+    ];
+  }
+
+  if(pkgType === "pageTone"){
+    availableOptions = [
+      { name:"รับไฟล์ RAW เพิ่ม", type:"rawAdd" },
+      { name:"รับสีกลางเพิ่ม", type:"neutralAdd" }
+    ];
+  }
+
+  if(availableOptions.length === 0){
+    optionSection.classList.add("hide");
+    return;
+  }else{
+    optionSection.classList.remove("hide");
+  }
+
+  availableOptions.forEach(opt=>{
+    optionArea.innerHTML += `
+      <label class="option-card">
+        <input
+          type="checkbox"
+          class="option"
+          data-name="${opt.name}"
+          value="100"
+        >
+        <div class="title">${opt.name}</div>
+        <div class="desc">เพิ่ม 100฿</div>
+      </label>
+    `;
+  });
+
+  document.querySelectorAll('.option').forEach(el=>{
+    el.addEventListener('change',calculate);
+  });
 }
 
 function calculate(){
   const pkg = document.querySelector('input[name="package"]:checked');
+
   let total = Number(pkg.value);
   let options = [];
 
-  const isJpgPackage = pkg.dataset.name.includes("ภาพหลังกล้อง");
-
   document.querySelectorAll('.option').forEach(el=>{
-    const optionName = el.dataset.name;
-
-    if(isJpgPackage && (optionName === "รับโทนเพิ่ม" || optionName === "สีกลางเพิ่ม")){
-      el.checked = false;
-      el.closest(".option-card").style.opacity = "0.35";
-      el.closest(".option-card").style.pointerEvents = "none";
-      return;
-    }else{
-      el.closest(".option-card").style.opacity = "1";
-      el.closest(".option-card").style.pointerEvents = "auto";
-    }
-
     if(el.checked){
       total += 100;
-      options.push(optionName);
+      options.push(el.dataset.name);
     }
   });
 
@@ -252,10 +349,6 @@ function copySummary(){
 
 document.querySelectorAll('input[name="tripType"]').forEach(el=>{
   el.addEventListener('change',renderPackages);
-});
-
-document.querySelectorAll('.option').forEach(el=>{
-  el.addEventListener('change',calculate);
 });
 
 renderPackages();
