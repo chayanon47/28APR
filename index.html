@@ -7,166 +7,282 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:radial-gradient(circle at top,#3a2b00,#090909 45%);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;
+  background:radial-gradient(circle at top,#4a3400 0%,#151515 38%,#070707 100%);
   color:#fff;
   padding:18px;
 }
-.wrap{max-width:720px;margin:auto}
-.header{text-align:center;margin:25px 0}
+
+.wrap{max-width:760px;margin:auto}
+
+.header{text-align:center;margin:26px 0 22px}
+
 .badge{
-  display:inline-block;background:#ffcc00;color:#111;
-  padding:6px 14px;border-radius:999px;font-weight:800;
+  display:inline-block;
+  background:linear-gradient(135deg,#ffdd33,#ff9900);
+  color:#111;
+  padding:7px 16px;
+  border-radius:999px;
+  font-weight:900;
 }
-h1{font-size:34px;margin:14px 0 5px}
-.sub{color:#ccc;margin:0}
+
+h1{font-size:36px;margin:16px 0 6px}
+.sub{color:#cfcfcf;margin:0;font-size:15px}
+
 .panel{
   background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(14px);
-  border-radius:24px;
-  padding:20px;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-.section{margin:22px 0}
-.section h2{font-size:18px;margin:0 0 12px;color:#ffdd55}
-.grid{display:grid;gap:12px}
-.option-card{
-  display:block;position:relative;cursor:pointer;
-  background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.13);
-  border-radius:18px;padding:16px;
-  transition:.25s;overflow:hidden;
+  backdrop-filter:blur(14px);
+  border-radius:26px;
+  padding:20px;
+  box-shadow:0 22px 70px rgba(0,0,0,.42);
 }
-.option-card:hover{transform:translateY(-2px);border-color:#ffcc00}
-.option-card input{position:absolute;opacity:0}
+
+.section{margin:24px 0}
+.section h2{font-size:18px;margin:0 0 12px;color:#ffdc4d}
+
+.grid{display:grid;gap:12px}
+
+.option-card{
+  display:block;
+  position:relative;
+  cursor:pointer;
+  background:rgba(255,255,255,.075);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:18px;
+  padding:16px;
+  transition:.22s ease;
+  overflow:hidden;
+}
+
+.option-card:hover{
+  transform:translateY(-2px);
+  border-color:#ffcc00;
+  background:rgba(255,255,255,.105);
+}
+
+.option-card input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
 .option-card:has(input:checked){
-  background:linear-gradient(135deg,rgba(255,204,0,.22),rgba(255,255,255,.08));
+  background:linear-gradient(135deg,rgba(255,204,0,.26),rgba(255,255,255,.085));
   border-color:#ffcc00;
 }
-.title{font-weight:800;font-size:17px}
-.desc{color:#bbb;font-size:14px;margin-top:4px}
-.price{font-size:24px;font-weight:900;color:#00ff99;margin-top:8px}
+
+.title{font-weight:850;font-size:17px}
+.desc{color:#bdbdbd;font-size:14px;margin-top:5px;line-height:1.45}
+.price{font-size:26px;font-weight:950;color:#00ff99;margin-top:8px}
+
 .option-wrap{
-  max-height:600px;opacity:1;transform:translateY(0);
-  transition:.35s ease;overflow:hidden;
+  max-height:900px;
+  opacity:1;
+  transform:translateY(0);
+  transition:max-height .38s ease, opacity .25s ease, transform .25s ease, margin .25s ease;
+  overflow:hidden;
 }
+
 .option-wrap.hide{
-  max-height:0;opacity:0;transform:translateY(-8px);
-  pointer-events:none;margin:0;
+  max-height:0;
+  opacity:0;
+  transform:translateY(-8px);
+  pointer-events:none;
+  margin:0;
 }
+
 .totalBox{
-  margin-top:22px;background:#050505;
-  border:1px solid rgba(0,255,153,.35);
-  border-radius:22px;padding:18px;text-align:center;
+  margin-top:24px;
+  background:linear-gradient(180deg,#080808,#030303);
+  border:1px solid rgba(0,255,153,.38);
+  border-radius:24px;
+  padding:20px;
+  text-align:center;
 }
-.totalText{color:#aaa}
-.totalPrice{font-size:46px;font-weight:950;color:#00ff99}
+
+.totalText{color:#aaa;font-size:14px}
+.totalPrice{font-size:50px;font-weight:950;color:#00ff99}
+
 textarea{
-  width:100%;height:165px;margin-top:14px;
-  border:0;border-radius:16px;padding:14px;
-  background:#111;color:#fff;font-size:15px;
-  resize:none;outline:none;
+  width:100%;
+  height:178px;
+  margin-top:15px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  padding:15px;
+  background:#101010;
+  color:#fff;
+  font-size:15px;
+  line-height:1.5;
+  resize:none;
+  outline:none;
 }
+
 button{
-  width:100%;border:0;border-radius:16px;
-  background:linear-gradient(135deg,#ffcc00,#ff9900);
-  padding:16px;font-size:18px;font-weight:900;
-  cursor:pointer;margin-top:12px;
+  width:100%;
+  border:0;
+  border-radius:18px;
+  background:linear-gradient(135deg,#ffdd33,#ff9900);
+  color:#111;
+  padding:16px;
+  font-size:18px;
+  font-weight:950;
+  cursor:pointer;
+  margin-top:12px;
 }
-.footer{text-align:center;color:#888;font-size:13px;margin:18px 0}
+
+.footer{
+  text-align:center;
+  color:#8d8d8d;
+  font-size:13px;
+  margin:18px 0;
+}
+
+.note{
+  color:#999;
+  font-size:13px;
+  margin-top:8px;
+}
+
+@media (min-width:680px){
+  .two-col{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 
 <body>
+
 <div class="wrap">
 
-<div class="header">
-  <div class="badge">28APR PHOTO RATE</div>
-  <h1>คำนวณราคาภาพ</h1>
-  <p class="sub">เลือกแพ็กเกจ แล้วดูยอดรวมได้ทันที</p>
-</div>
+  <div class="header">
+    <div class="badge">28APR PHOTO RATE</div>
+    <h1>คำนวณราคาภาพ</h1>
+    <p class="sub">เลือกแพ็กเกจ ดูยอดรวม และคัดลอกข้อความส่งลูกค้าได้ทันที</p>
+  </div>
 
-<div class="panel">
+  <div class="panel">
 
-  <div class="section">
-    <h2>1. เลือกประเภทเหมา</h2>
-    <div class="grid">
-      <label class="option-card">
-        <input type="radio" name="tripType" value="single" checked>
-        <div class="title">ขาเดียว</div>
-        <div class="desc">ขาขึ้น หรือ ขาลง</div>
-      </label>
+    <div class="section">
+      <h2>1. เลือกประเภทเหมา</h2>
+      <div class="grid two-col">
+        <label class="option-card">
+          <input type="radio" name="tripType" value="single" checked>
+          <div class="title">ขาเดียว</div>
+          <div class="desc">ขาขึ้น หรือ ขาลง</div>
+        </label>
 
-      <label class="option-card">
-        <input type="radio" name="tripType" value="both">
-        <div class="title">2 ขา</div>
-        <div class="desc">ขาขึ้น + ขาลง</div>
-      </label>
+        <label class="option-card">
+          <input type="radio" name="tripType" value="both">
+          <div class="title">2 ขา</div>
+          <div class="desc">ขาขึ้น + ขาลง</div>
+        </label>
+      </div>
     </div>
-  </div>
 
-  <div class="section">
-    <h2>2. เลือกแพ็กเกจ</h2>
-    <div id="packageArea" class="grid"></div>
-  </div>
-
-  <div id="toneSection" class="section option-wrap hide">
-    <h2>3. เลือกโทนภาพหลัก</h2>
-    <div class="grid">
-      <label class="option-card">
-        <input type="radio" name="mainTone" value="โทน A" checked>
-        <div class="title">โทน A</div>
-      </label>
-      <label class="option-card">
-        <input type="radio" name="mainTone" value="โทน B">
-        <div class="title">โทน B</div>
-      </label>
-      <label class="option-card">
-        <input type="radio" name="mainTone" value="โทน C">
-        <div class="title">โทน C</div>
-      </label>
+    <div class="section">
+      <h2>2. เลือกแพ็กเกจ</h2>
+      <div id="packageArea" class="grid"></div>
     </div>
+
+    <div id="toneSection" class="section option-wrap hide">
+      <h2>3. เลือกโทนภาพหลัก</h2>
+
+      <div class="grid">
+        <label class="option-card">
+          <input type="radio" name="mainTone" value="โทน A" checked>
+          <div class="title">โทน A</div>
+          <div class="desc">ใช้เป็นโทนหลักของชุดภาพนี้</div>
+        </label>
+
+        <label class="option-card">
+          <input type="radio" name="mainTone" value="โทน B">
+          <div class="title">โทน B</div>
+          <div class="desc">ใช้เป็นโทนหลักของชุดภาพนี้</div>
+        </label>
+
+        <label class="option-card">
+          <input type="radio" name="mainTone" value="โทน C">
+          <div class="title">โทน C</div>
+          <div class="desc">ใช้เป็นโทนหลักของชุดภาพนี้</div>
+        </label>
+      </div>
+
+      <div class="note">โทนที่เลือกเป็นโทนหลัก จะไม่แสดงซ้ำใน Option เพิ่ม</div>
+    </div>
+
+    <div id="optionSection" class="section option-wrap">
+      <h2 id="optionTitle">3. Option เพิ่ม รายการละ 100฿</h2>
+      <div id="optionArea" class="grid"></div>
+    </div>
+
+    <div class="totalBox">
+      <div class="totalText">ยอดรวมทั้งหมด</div>
+      <div class="totalPrice"><span id="total">300</span>฿</div>
+    </div>
+
+    <textarea id="summary" readonly></textarea>
+
+    <button onclick="copySummary()">คัดลอกข้อความสรุป</button>
+
   </div>
 
-  <div id="optionSection" class="section option-wrap">
-    <h2>4. Option เพิ่ม รายการละ 100฿</h2>
-    <div id="optionArea" class="grid"></div>
-  </div>
-
-  <div class="totalBox">
-    <div class="totalText">ยอดรวมทั้งหมด</div>
-    <div class="totalPrice"><span id="total">300</span>฿</div>
-  </div>
-
-  <textarea id="summary" readonly></textarea>
-  <button onclick="copySummary()">คัดลอกข้อความสรุป</button>
-
-</div>
-
-<div class="footer">28APR : Automotive Photography</div>
+  <div class="footer">28APR : Automotive Photography</div>
 
 </div>
 
 <script>
 const prices = {
   single: [
-    { name:"ภาพหลังกล้อง JPG 3000px", price:300, type:"jpg" },
-    { name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px", price:400, type:"neutral" },
-    { name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px", price:500, type:"pageTone" }
+    {
+      name:"ภาพหลังกล้อง JPG 3000px",
+      price:300,
+      type:"jpg",
+      desc:"ไฟล์ JPG หลังกล้อง ขนาด 3000px"
+    },
+    {
+      name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px",
+      price:400,
+      type:"neutral",
+      desc:"ได้ไฟล์ใหญ่ และไฟล์ 2048px"
+    },
+    {
+      name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px",
+      price:500,
+      type:"pageTone",
+      desc:"เลือกโทนหลัก A / B / C ได้"
+    }
   ],
+
   both: [
-    { name:"ภาพหลังกล้อง JPG 3000px", price:500, type:"jpg" },
-    { name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px", price:800, type:"neutral" },
-    { name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px", price:1000, type:"pageTone" }
+    {
+      name:"ภาพหลังกล้อง JPG 3000px",
+      price:500,
+      type:"jpg",
+      desc:"ไฟล์ JPG หลังกล้อง ขนาด 3000px"
+    },
+    {
+      name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px",
+      price:800,
+      type:"neutral",
+      desc:"ได้ไฟล์ใหญ่ และไฟล์ 2048px"
+    },
+    {
+      name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px",
+      price:1000,
+      type:"pageTone",
+      desc:"เลือกโทนหลัก A / B / C ได้"
+    }
   ]
 };
 
 function renderPackages(){
   const tripType = document.querySelector('input[name="tripType"]:checked').value;
   const area = document.getElementById("packageArea");
+
   area.innerHTML = "";
 
   prices[tripType].forEach((pkg,index)=>{
@@ -178,9 +294,10 @@ function renderPackages(){
           value="${pkg.price}"
           data-name="${pkg.name}"
           data-type="${pkg.type}"
-          ${index===0 ? "checked" : ""}
+          ${index === 0 ? "checked" : ""}
         >
         <div class="title">${pkg.name}</div>
+        <div class="desc">${pkg.desc}</div>
         <div class="price">${pkg.price}฿</div>
       </label>
     `;
@@ -213,12 +330,17 @@ function renderTone(){
 function renderOptions(){
   const pkg = document.querySelector('input[name="package"]:checked');
   const pkgType = pkg.dataset.type;
+
   const optionArea = document.getElementById("optionArea");
   const optionSection = document.getElementById("optionSection");
+  const optionTitle = document.getElementById("optionTitle");
 
   optionArea.innerHTML = "";
 
   let options = [];
+
+  const selectedMainTone =
+    document.querySelector('input[name="mainTone"]:checked')?.value || "";
 
   if(pkgType === "jpg"){
     options = [
@@ -238,24 +360,39 @@ function renderOptions(){
   if(pkgType === "pageTone"){
     options = [
       "รับไฟล์ RAW เพิ่ม",
-      "รับสีกลางเพิ่ม",
+      "รับไฟล์สีกลางเพิ่ม",
       "รับโทนเพิ่ม โทน A",
       "รับโทนเพิ่ม โทน B",
       "รับโทนเพิ่ม โทน C"
     ];
+
+    options = options.filter(opt=>{
+      return !opt.includes(selectedMainTone);
+    });
+  }
+
+  if(pkgType === "pageTone"){
+    optionTitle.innerText = "4. Option เพิ่ม รายการละ 100฿";
+  }else{
+    optionTitle.innerText = "3. Option เพิ่ม รายการละ 100฿";
   }
 
   if(options.length === 0){
     optionSection.classList.add("hide");
     return;
-  }else{
-    optionSection.classList.remove("hide");
   }
+
+  optionSection.classList.remove("hide");
 
   options.forEach(opt=>{
     optionArea.innerHTML += `
       <label class="option-card">
-        <input type="checkbox" class="option" data-name="${opt}" value="100">
+        <input
+          type="checkbox"
+          class="option"
+          data-name="${opt}"
+          value="100"
+        >
         <div class="title">${opt}</div>
         <div class="desc">เพิ่ม 100฿</div>
       </label>
@@ -269,6 +406,7 @@ function renderOptions(){
 
 function calculate(){
   const pkg = document.querySelector('input[name="package"]:checked');
+
   let total = Number(pkg.value);
   let options = [];
 
@@ -286,26 +424,34 @@ function calculate(){
     ? "ขาเดียว ขาขึ้นหรือขาลง"
     : "2 ขา ขาขึ้น + ขาลง";
 
-  const mainTone =
+  const toneLine =
     pkg.dataset.type === "pageTone"
-    ? document.querySelector('input[name="mainTone"]:checked').value
-    : "-";
+    ? `โทนภาพหลัก: ${document.querySelector('input[name="mainTone"]:checked').value}\n`
+    : "";
 
   document.getElementById("summary").value =
 `สรุปราคาภาพถ่าย
 
 ประเภท: ${tripText}
 แพ็กเกจ: ${pkg.dataset.name}
-โทนภาพหลัก: ${mainTone}
-Option เพิ่ม: ${options.length ? options.join(", ") : "ไม่มี"}
+${toneLine}Option เพิ่ม: ${options.length ? options.join(", ") : "ไม่มี"}
 
 รวมทั้งหมด: ${total} บาท`;
 }
 
 function copySummary(){
   const text = document.getElementById("summary").value;
-  navigator.clipboard.writeText(text);
-  alert("คัดลอกข้อความแล้ว");
+
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      alert("คัดลอกข้อความแล้ว");
+    });
+  }else{
+    const textarea = document.getElementById("summary");
+    textarea.select();
+    document.execCommand("copy");
+    alert("คัดลอกข้อความแล้ว");
+  }
 }
 
 document.querySelectorAll('input[name="tripType"]').forEach(el=>{
@@ -313,7 +459,10 @@ document.querySelectorAll('input[name="tripType"]').forEach(el=>{
 });
 
 document.querySelectorAll('input[name="mainTone"]').forEach(el=>{
-  el.addEventListener('change',calculate);
+  el.addEventListener('change',()=>{
+    renderOptions();
+    calculate();
+  });
 });
 
 renderPackages();
