@@ -4,301 +4,220 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>คำนวณราคาภาพ 28APR</title>
-
 <style>
+*{box-sizing:border-box}
 body{
-    font-family: system-ui,sans-serif;
-    background:#111;
-    color:#fff;
-    margin:0;
-    padding:20px;
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:radial-gradient(circle at top,#3a2b00,#090909 45%);
+  color:#fff;
+  padding:18px;
 }
-
-.container{
-    max-width:700px;
-    margin:auto;
-    background:#1b1b1b;
-    padding:25px;
-    border-radius:15px;
+.wrap{max-width:720px;margin:auto}
+.header{text-align:center;margin:25px 0}
+.badge{
+  display:inline-block;background:#ffcc00;color:#111;
+  padding:6px 14px;border-radius:999px;font-weight:800;
 }
-
-h1{
-    text-align:center;
-    color:#ffcc00;
+h1{font-size:34px;margin:14px 0 5px}
+.sub{color:#ccc;margin:0}
+.panel{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(14px);
+  border-radius:24px;
+  padding:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
-
-.card{
-    background:#2a2a2a;
-    padding:12px;
-    border-radius:10px;
-    margin:8px 0;
+.section{margin:22px 0}
+.section h2{font-size:18px;margin:0 0 12px;color:#ffdd55}
+.grid{display:grid;gap:12px}
+.option-card{
+  display:block;position:relative;cursor:pointer;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:18px;padding:16px;
+  transition:.2s;
 }
-
-label{
-    display:block;
-    cursor:pointer;
+.option-card:hover{transform:translateY(-2px);border-color:#ffcc00}
+.option-card input{position:absolute;opacity:0}
+.option-card:has(input:checked){
+  background:linear-gradient(135deg,rgba(255,204,0,.22),rgba(255,255,255,.08));
+  border-color:#ffcc00;
 }
-
-input{
-    margin-right:8px;
+.title{font-weight:800;font-size:17px}
+.desc{color:#bbb;font-size:14px;margin-top:4px}
+.price{font-size:24px;font-weight:900;color:#00ff99;margin-top:8px}
+.totalBox{
+  margin-top:22px;
+  background:#050505;
+  border:1px solid rgba(0,255,153,.35);
+  border-radius:22px;
+  padding:18px;text-align:center;
 }
-
-.total{
-    margin-top:20px;
-    font-size:36px;
-    font-weight:bold;
-    color:#00ff88;
-    text-align:center;
-}
-
+.totalText{color:#aaa}
+.totalPrice{font-size:46px;font-weight:950;color:#00ff99}
 textarea{
-    width:100%;
-    height:140px;
-    margin-top:15px;
-    border-radius:10px;
-    padding:10px;
-    font-size:15px;
-    box-sizing:border-box;
+  width:100%;height:145px;margin-top:14px;
+  border:0;border-radius:16px;padding:14px;
+  background:#111;color:#fff;font-size:15px;
+  resize:none;outline:none;
 }
-
 button{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-    background:#ffcc00;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
+  width:100%;border:0;border-radius:16px;
+  background:linear-gradient(135deg,#ffcc00,#ff9900);
+  padding:16px;font-size:18px;font-weight:900;
+  cursor:pointer;margin-top:12px;
 }
+.footer{text-align:center;color:#888;font-size:13px;margin:18px 0}
 </style>
 </head>
 <body>
 
-<div class="container">
+<div class="wrap">
+  <div class="header">
+    <div class="badge">28APR PHOTO RATE</div>
+    <h1>คำนวณราคาภาพ</h1>
+    <p class="sub">เลือกแพ็กเกจ แล้วดูยอดรวมได้ทันที</p>
+  </div>
 
-<h1>คำนวณราคาภาพ</h1>
+  <div class="panel">
+    <div class="section">
+      <h2>1. เลือกประเภทเหมา</h2>
+      <div class="grid">
+        <label class="option-card">
+          <input type="radio" name="tripType" value="single" checked>
+          <div class="title">ขาเดียว</div>
+          <div class="desc">ขาขึ้น หรือ ขาลง</div>
+        </label>
 
-<h2>เลือกประเภทเหมา</h2>
+        <label class="option-card">
+          <input type="radio" name="tripType" value="both">
+          <div class="title">2 ขา</div>
+          <div class="desc">ขาขึ้น + ขาลง</div>
+        </label>
+      </div>
+    </div>
 
-<div class="card">
-<label>
-<input type="radio" name="tripType" value="single" checked>
-เหมาภาพ ขาขึ้นหรือขาลง (ขาเดียว)
-</label>
-</div>
+    <div class="section">
+      <h2>2. เลือกแพ็กเกจ</h2>
+      <div id="packageArea" class="grid"></div>
+    </div>
 
-<div class="card">
-<label>
-<input type="radio" name="tripType" value="both">
-เหมาภาพทั้งหมด ขาขึ้น + ขาลง
-</label>
-</div>
+    <div class="section">
+      <h2>3. Option เพิ่ม รายการละ 100฿</h2>
 
-<h2>เลือกแพ็กเกจ</h2>
+      <label class="option-card">
+        <input type="checkbox" class="option" data-name="ไฟล์ RAW">
+        <div class="title">ไฟล์ RAW</div>
+        <div class="desc">เพิ่ม 100฿</div>
+      </label>
 
-<div id="packageArea"></div>
+      <label class="option-card">
+        <input type="checkbox" class="option" data-name="รับโทนเพิ่ม">
+        <div class="title">รับโทนเพิ่ม</div>
+        <div class="desc">เพิ่ม 100฿</div>
+      </label>
 
-<h2>🔥 Option เพิ่ม (รายการละ 100฿)</h2>
+      <label class="option-card">
+        <input type="checkbox" class="option" data-name="สีกลางเพิ่ม">
+        <div class="title">สีกลางเพิ่ม</div>
+        <div class="desc">เพิ่ม 100฿</div>
+      </label>
+    </div>
 
-<div class="card">
-<label>
-<input type="checkbox" class="option" value="100">
-ไฟล์ RAW
-</label>
-</div>
+    <div class="totalBox">
+      <div class="totalText">ยอดรวมทั้งหมด</div>
+      <div class="totalPrice"><span id="total">300</span>฿</div>
+    </div>
 
-<div class="card">
-<label>
-<input type="checkbox" class="option" value="100">
-รับโทนเพิ่ม
-</label>
-</div>
+    <textarea id="summary" readonly></textarea>
+    <button onclick="copySummary()">คัดลอกข้อความสรุป</button>
+  </div>
 
-<div class="card">
-<label>
-<input type="checkbox" class="option" value="100">
-สีกลางเพิ่ม
-</label>
-</div>
-
-<div class="total">
-รวม <span id="total">300</span> ฿
-</div>
-
-<textarea id="summary" readonly></textarea>
-
-<button onclick="copySummary()">
-คัดลอกข้อความสรุป
-</button>
-
+  <div class="footer">28APR : Automotive Photography</div>
 </div>
 
 <script>
-
 const prices = {
-    single: [
-        {
-            name:"ภาพหลังกล้อง JPG 3000px",
-            price:300
-        },
-        {
-            name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px",
-            price:400
-        },
-        {
-            name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px",
-            price:500
-        }
-    ],
-    both: [
-        {
-            name:"ภาพหลังกล้อง JPG 3000px",
-            price:500
-        },
-        {
-            name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px",
-            price:800
-        },
-        {
-            name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px",
-            price:1000
-        }
-    ]
+  single: [
+    { name:"ภาพหลังกล้อง JPG 3000px", price:300 },
+    { name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px", price:400 },
+    { name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px", price:500 }
+  ],
+  both: [
+    { name:"ภาพหลังกล้อง JPG 3000px", price:500 },
+    { name:"แต่งภาพสีกลาง ไฟล์ใหญ่ + 2048px", price:800 },
+    { name:"แต่งภาพโทนเพจ ไฟล์ใหญ่ + 2048px", price:1000 }
+  ]
 };
 
 function renderPackages(){
+  const tripType = document.querySelector('input[name="tripType"]:checked').value;
+  const area = document.getElementById("packageArea");
+  area.innerHTML = "";
 
-    const tripType =
-        document.querySelector(
-            'input[name="tripType"]:checked'
-        ).value;
+  prices[tripType].forEach((pkg,index)=>{
+    area.innerHTML += `
+      <label class="option-card">
+        <input type="radio" name="package" value="${pkg.price}" data-name="${pkg.name}" ${index===0?"checked":""}>
+        <div class="title">${pkg.name}</div>
+        <div class="price">${pkg.price}฿</div>
+      </label>
+    `;
+  });
 
-    const area =
-        document.getElementById("packageArea");
+  document.querySelectorAll('input[name="package"]').forEach(el=>{
+    el.addEventListener('change',calculate);
+  });
 
-    area.innerHTML = "";
-
-    prices[tripType].forEach((pkg,index)=>{
-
-        area.innerHTML += `
-        <div class="card">
-            <label>
-                <input
-                    type="radio"
-                    name="package"
-                    value="${pkg.price}"
-                    data-name="${pkg.name}"
-                    ${index===0 ? "checked" : ""}
-                >
-                ${pkg.price}฿ — ${pkg.name}
-            </label>
-        </div>
-        `;
-    });
-
-    document
-        .querySelectorAll('input[name="package"]')
-        .forEach(el=>{
-            el.addEventListener('change',calculate);
-        });
-
-    calculate();
+  calculate();
 }
 
 function calculate(){
+  const pkg = document.querySelector('input[name="package"]:checked');
+  let total = Number(pkg.value);
+  let options = [];
 
-    const pkg =
-        document.querySelector(
-            'input[name="package"]:checked'
-        );
+  document.querySelectorAll('.option').forEach(el=>{
+    if(el.checked){
+      total += 100;
+      options.push(el.dataset.name);
+    }
+  });
 
-    let total =
-        Number(pkg.value);
+  document.getElementById("total").innerText = total;
 
-    let options = [];
+  const tripText =
+    document.querySelector('input[name="tripType"]:checked').value === "single"
+    ? "ขาเดียว ขาขึ้นหรือขาลง"
+    : "2 ขา ขาขึ้น + ขาลง";
 
-    document
-        .querySelectorAll('.option')
-        .forEach(el=>{
+  document.getElementById("summary").value =
+`สรุปราคาภาพถ่าย
 
-            if(el.checked){
-                total += 100;
+ประเภท: ${tripText}
+แพ็กเกจ: ${pkg.dataset.name}
+Option เพิ่ม: ${options.length ? options.join(", ") : "ไม่มี"}
 
-                options.push(
-                    el.parentElement.innerText
-                    .replace('+100฿','')
-                    .trim()
-                );
-            }
-        });
-
-    document.getElementById("total")
-        .innerText = total;
-
-    const tripText =
-        document.querySelector(
-            'input[name="tripType"]:checked'
-        ).value === "single"
-        ? "ขาขึ้นหรือขาลง (ขาเดียว)"
-        : "ขาขึ้น + ขาลง";
-
-    let summary =
-`สรุปรายการ
-
-ประเภท:
-${tripText}
-
-แพ็กเกจ:
-${pkg.dataset.name}
-
-Option:
-${options.length ? options.join(', ') : 'ไม่มี'}
-
-รวมทั้งหมด:
-${total} บาท`;
-
-    document.getElementById("summary")
-        .value = summary;
+รวมทั้งหมด: ${total} บาท`;
 }
 
 function copySummary(){
-
-    const textarea =
-        document.getElementById("summary");
-
-    textarea.select();
-
-    navigator.clipboard.writeText(
-        textarea.value
-    );
-
-    alert("คัดลอกแล้ว");
+  const text = document.getElementById("summary").value;
+  navigator.clipboard.writeText(text);
+  alert("คัดลอกข้อความแล้ว");
 }
 
-document
-    .querySelectorAll(
-        'input[name="tripType"]'
-    )
-    .forEach(el=>{
-        el.addEventListener(
-            'change',
-            renderPackages
-        );
-    });
+document.querySelectorAll('input[name="tripType"]').forEach(el=>{
+  el.addEventListener('change',renderPackages);
+});
 
-document
-    .querySelectorAll('.option')
-    .forEach(el=>{
-        el.addEventListener(
-            'change',
-            calculate
-        );
-    });
+document.querySelectorAll('.option').forEach(el=>{
+  el.addEventListener('change',calculate);
+});
 
 renderPackages();
-
 </script>
 
 </body>
