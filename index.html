@@ -76,6 +76,39 @@ h1{font-size:36px;margin:16px 0 6px}
 .desc{color:#bdbdbd;font-size:14px;margin-top:5px;line-height:1.45}
 .price{font-size:26px;font-weight:950;color:#00ff99;margin-top:8px}
 
+.tone-segment{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:18px;
+  padding:6px;
+  gap:6px;
+}
+
+.tone-segment label{
+  position:relative;
+  cursor:pointer;
+  text-align:center;
+  border-radius:14px;
+  padding:14px 8px;
+  font-weight:900;
+  color:#ccc;
+  transition:.22s ease;
+}
+
+.tone-segment input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.tone-segment label:has(input:checked){
+  background:linear-gradient(135deg,#ffdd33,#ff9900);
+  color:#111;
+  box-shadow:0 8px 22px rgba(255,153,0,.25);
+}
+
 .option-wrap{
   max-height:1200px;
   opacity:1;
@@ -222,23 +255,20 @@ button{
     <div id="toneSection" class="section option-wrap hide">
       <h2>3. เลือกโทนภาพหลัก</h2>
 
-      <div class="grid">
-        <label class="option-card">
+      <div class="tone-segment">
+        <label>
           <input type="radio" name="mainTone" value="A" checked>
-          <div class="title">โทน A</div>
-          <div class="desc">เลือกเป็นโทนหลักของชุดภาพนี้</div>
+          โทน A
         </label>
 
-        <label class="option-card">
+        <label>
           <input type="radio" name="mainTone" value="B">
-          <div class="title">โทน B</div>
-          <div class="desc">เลือกเป็นโทนหลักของชุดภาพนี้</div>
+          โทน B
         </label>
 
-        <label class="option-card">
+        <label>
           <input type="radio" name="mainTone" value="C">
-          <div class="title">โทน C</div>
-          <div class="desc">เลือกเป็นโทนหลักของชุดภาพนี้</div>
+          โทน C
         </label>
       </div>
 
