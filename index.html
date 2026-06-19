@@ -17,7 +17,6 @@ body{
 }
 
 .wrap{max-width:760px;margin:auto}
-
 .header{text-align:center;margin:26px 0 22px}
 
 .badge{
@@ -38,7 +37,6 @@ h1{font-size:36px;margin:16px 0 6px}
   backdrop-filter:blur(14px);
   border-radius:26px;
   padding:20px;
-  box-shadow:0 22px 70px rgba(0,0,0,.42);
 }
 
 .section{margin:24px 0}
@@ -61,7 +59,6 @@ h1{font-size:36px;margin:16px 0 6px}
 .option-card:hover{
   transform:translateY(-2px);
   border-color:#ffcc00;
-  background:rgba(255,255,255,.105);
 }
 
 .option-card input{
@@ -83,7 +80,7 @@ h1{font-size:36px;margin:16px 0 6px}
   max-height:900px;
   opacity:1;
   transform:translateY(0);
-  transition:max-height .38s ease, opacity .25s ease, transform .25s ease, margin .25s ease;
+  transition:.35s ease;
   overflow:hidden;
 }
 
@@ -95,9 +92,37 @@ h1{font-size:36px;margin:16px 0 6px}
   margin:0;
 }
 
+.sample-box{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.sample-box img{
+  width:100%;
+  display:block;
+}
+
+.sample-info{
+  padding:15px;
+  color:#ddd;
+  line-height:1.7;
+}
+
+.sample-tag{
+  display:inline-block;
+  background:#ffdd33;
+  color:#111;
+  padding:5px 10px;
+  border-radius:999px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
 .totalBox{
   margin-top:24px;
-  background:linear-gradient(180deg,#080808,#030303);
+  background:#050505;
   border:1px solid rgba(0,255,153,.38);
   border-radius:24px;
   padding:20px;
@@ -186,6 +211,11 @@ button{
     <div class="section">
       <h2>2. เลือกแพ็กเกจ</h2>
       <div id="packageArea" class="grid"></div>
+    </div>
+
+    <div id="sampleSection" class="section option-wrap">
+      <h2>ตัวอย่างงาน</h2>
+      <div id="sampleArea"></div>
     </div>
 
     <div id="toneSection" class="section option-wrap hide">
@@ -305,15 +335,66 @@ function renderPackages(){
 
   document.querySelectorAll('input[name="package"]').forEach(el=>{
     el.addEventListener('change',()=>{
+      renderSample();
       renderTone();
       renderOptions();
       calculate();
     });
   });
 
+  renderSample();
   renderTone();
   renderOptions();
   calculate();
+}
+
+function renderSample(){
+  const pkg = document.querySelector('input[name="package"]:checked');
+  const pkgType = pkg.dataset.type;
+  const sampleArea = document.getElementById("sampleArea");
+
+  if(pkgType === "jpg"){
+    sampleArea.innerHTML = `
+      <div class="sample-box">
+        <img src="images/sample-jpg.jpg" alt="ตัวอย่างไฟล์ JPG หลังกล้อง">
+        <div class="sample-info">
+          <div class="sample-tag">JPG หลังกล้อง 3000px</div><br>
+          <strong>ไฟล์ JPG หลังกล้อง</strong><br>
+          ขนาด 3000px<br>
+          ไม่ทำสี ไม่แต่งภาพ<br>
+          รับไฟล์ด่วนได้ทันที
+        </div>
+      </div>
+    `;
+  }
+
+  if(pkgType === "neutral"){
+    sampleArea.innerHTML = `
+      <div class="sample-box">
+        <img src="images/sample-neutral.jpg" alt="ตัวอย่างแต่งภาพสีกลาง">
+        <div class="sample-info">
+          <div class="sample-tag">สีกลาง</div><br>
+          <strong>แต่งภาพสีกลาง</strong><br>
+          สีสุภาพ ดูง่าย ใช้งานได้กว้าง<br>
+          ได้ไฟล์ใหญ่ + 2048px
+        </div>
+      </div>
+    `;
+  }
+
+  if(pkgType === "pageTone"){
+    sampleArea.innerHTML = `
+      <div class="sample-box">
+        <img src="images/sample-tone.jpg" alt="ตัวอย่างแต่งภาพโทนเพจ">
+        <div class="sample-info">
+          <div class="sample-tag">โทนเพจ</div><br>
+          <strong>แต่งภาพโทนเพจ</strong><br>
+          เลือกโทนหลัก A / B / C ได้<br>
+          ได้ไฟล์ใหญ่ + 2048px
+        </div>
+      </div>
+    `;
+  }
 }
 
 function renderTone(){
