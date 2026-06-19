@@ -179,10 +179,24 @@ function calculate(){
   let total = Number(pkg.value);
   let options = [];
 
+  const isJpgPackage = pkg.dataset.name.includes("ภาพหลังกล้อง");
+
   document.querySelectorAll('.option').forEach(el=>{
+    const optionName = el.dataset.name;
+
+    if(isJpgPackage && (optionName === "รับโทนเพิ่ม" || optionName === "สีกลางเพิ่ม")){
+      el.checked = false;
+      el.closest(".option-card").style.opacity = "0.35";
+      el.closest(".option-card").style.pointerEvents = "none";
+      return;
+    }else{
+      el.closest(".option-card").style.opacity = "1";
+      el.closest(".option-card").style.pointerEvents = "auto";
+    }
+
     if(el.checked){
       total += 100;
-      options.push(el.dataset.name);
+      options.push(optionName);
     }
   });
 
