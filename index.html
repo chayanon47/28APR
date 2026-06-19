@@ -77,7 +77,7 @@ h1{font-size:36px;margin:16px 0 6px}
 .price{font-size:26px;font-weight:950;color:#00ff99;margin-top:8px}
 
 .option-wrap{
-  max-height:900px;
+  max-height:1200px;
   opacity:1;
   transform:translateY(0);
   transition:.35s ease;
@@ -118,6 +118,13 @@ h1{font-size:36px;margin:16px 0 6px}
   border-radius:999px;
   font-weight:900;
   margin-bottom:8px;
+}
+
+.tone-preview{
+  width:100%;
+  display:block;
+  border-radius:12px;
+  margin-bottom:12px;
 }
 
 .totalBox{
@@ -222,23 +229,28 @@ button{
       <h2>3. เลือกโทนภาพหลัก</h2>
 
       <div class="grid">
+
         <label class="option-card">
           <input type="radio" name="mainTone" value="โทน A" checked>
+          <img src="image/tone-a.jpg" class="tone-preview" alt="ตัวอย่างโทน A">
           <div class="title">โทน A</div>
-          <div class="desc">ใช้เป็นโทนหลักของชุดภาพนี้</div>
+          <div class="desc">เลือกเป็นโทนหลักของชุดภาพนี้</div>
         </label>
 
         <label class="option-card">
           <input type="radio" name="mainTone" value="โทน B">
+          <img src="image/tone-b.jpg" class="tone-preview" alt="ตัวอย่างโทน B">
           <div class="title">โทน B</div>
-          <div class="desc">ใช้เป็นโทนหลักของชุดภาพนี้</div>
+          <div class="desc">เลือกเป็นโทนหลักของชุดภาพนี้</div>
         </label>
 
         <label class="option-card">
           <input type="radio" name="mainTone" value="โทน C">
+          <img src="image/tone-c.jpg" class="tone-preview" alt="ตัวอย่างโทน C">
           <div class="title">โทน C</div>
-          <div class="desc">ใช้เป็นโทนหลักของชุดภาพนี้</div>
+          <div class="desc">เลือกเป็นโทนหลักของชุดภาพนี้</div>
         </label>
+
       </div>
 
       <div class="note">โทนที่เลือกเป็นโทนหลัก จะไม่แสดงซ้ำใน Option เพิ่ม</div>
@@ -351,9 +363,13 @@ function renderPackages(){
 function renderSample(){
   const pkg = document.querySelector('input[name="package"]:checked');
   const pkgType = pkg.dataset.type;
+  const sampleSection = document.getElementById("sampleSection");
   const sampleArea = document.getElementById("sampleArea");
 
+  sampleArea.innerHTML = "";
+
   if(pkgType === "jpg"){
+    sampleSection.classList.remove("hide");
     sampleArea.innerHTML = `
       <div class="sample-box">
         <img src="image/sample-jpg.jpg" alt="ตัวอย่างไฟล์ JPG หลังกล้อง">
@@ -369,6 +385,7 @@ function renderSample(){
   }
 
   if(pkgType === "neutral"){
+    sampleSection.classList.remove("hide");
     sampleArea.innerHTML = `
       <div class="sample-box">
         <img src="image/sample-neutral.jpg" alt="ตัวอย่างแต่งภาพสีกลาง">
@@ -383,17 +400,8 @@ function renderSample(){
   }
 
   if(pkgType === "pageTone"){
-    sampleArea.innerHTML = `
-      <div class="sample-box">
-        <img src="image/sample-tone.jpg" alt="ตัวอย่างแต่งภาพโทนเพจ">
-        <div class="sample-info">
-          <div class="sample-tag">โทนเพจ</div><br>
-          <strong>แต่งภาพโทนเพจ</strong><br>
-          เลือกโทนหลัก A / B / C ได้<br>
-          ได้ไฟล์ใหญ่ + 2048px
-        </div>
-      </div>
-    `;
+    sampleSection.classList.add("hide");
+    sampleArea.innerHTML = "";
   }
 }
 
